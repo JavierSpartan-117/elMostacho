@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Iniciar Sesion</title>
+</head>
+<body>
+    <section class="ezy__signin3 light d-flex align-items-center"
+  style="background-image: url(https://www.comunicare.es/wp-content/uploads/2021/01/Publicidad-para-barberia.jpg)">
+  <div class="container">
+    <div class="row py-5">
+      <div class="col-lg-5">
+        <div class="card ezy__signin3-form-card">
+          <div class="card-body p-md-5">
+            <h2 class="ezy__signin3-heading mb-4 mb-md-5">Iniciar Sesion</h2>
+
+            <form id="formularioIniciarSesion">
+              <div class="form-group mb-md-5 mt-2">
+                <label class="mb-3">Usuario</label>
+                <input type="text" class="form-control" id="email" placeholder="Ingrese nombre de usuario" />
+              </div>
+              <div class="form-group mb-md-5 mt-2">
+                <label class="mb-3">Contraseña</label>
+                <input type="password" class="form-control" id="password" placeholder="Ingrese contraseña" />
+              </div>
+              
+              <button type="submit" class="btn ezy__signin3-btn-submit w-100">Iniciar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.ezy__signin3 {
+  /* Bootstrap variables */
+  --bs-body-color: #7b5033;
+  --bs-body-bg: rgb(255, 255, 255);
+
+  /* Easy Frontend variables */
+  --ezy-theme-color: rgb(13, 110, 253);
+  --ezy-theme-color-rgb: 13, 110, 253;
+  --ezy-form-card-bg: #ffffff;
+  --ezy-form-card-shadow: 0 16px 24px rgba(197, 206, 222, 0.25);
+
+  background-color: var(--bs-body-bg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Gray Block Style */
+.gray .ezy__signin3,
+.ezy__signin3.gray {
+  /* Bootstrap variables */
+  --bs-body-bg: rgb(246, 246, 246);
+
+  /* Easy Frontend variables */
+  --ezy-form-card-bg: #f6f6f6;
+  --ezy-form-card-shadow: 0 16px 24px rgba(209, 223, 247, 0.25);
+}
+
+/* Dark Gray Block Style */
+.dark-gray .ezy__signin3,
+.ezy__signin3.dark-gray {
+  /* Bootstrap variables */
+  --bs-body-color: #ffffff;
+  --bs-body-bg: rgb(30, 39, 53);
+  --bs-dark-rgb: 255, 255, 255;
+
+  /* Easy Frontend variables */
+  --ezy-form-card-bg: #253140;
+  --ezy-form-card-shadow: none;
+}
+
+/* Dark Block Style */
+.dark .ezy__signin3,
+.ezy__signin3.dark {
+  /* Bootstrap variables */
+  --bs-body-color: #ffffff;
+  --bs-body-bg: rgb(11, 23, 39);
+  --bs-dark-rgb: 255, 255, 255;
+
+  /* Easy Frontend variables */
+  --ezy-form-card-bg: #162231;
+  --ezy-form-card-shadow: none;
+}
+
+.ezy__signin3-heading {
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 50px;
+  color: var(--bs-body-color);
+}
+
+.ezy__signin3-form-card {
+  background-color: var(--ezy-form-card-bg);
+  border: none;
+  box-shadow: var(--ezy-form-card-shadow);
+  border-radius: 15px;
+}
+
+.ezy__signin3-form-card * {
+  color: var(--bs-body-color);
+}
+
+.ezy__signin3 .form-control {
+  min-height: 48px;
+  line-height: 40px;
+  border-color: transparent;
+  background: rgba(163, 190, 241, 0.14);
+  border-radius: 10px;
+  color: var(--bs-body-color);
+}
+
+.ezy__signin3 .form-control:focus {
+  border-color: var(--ezy-theme-color);
+  box-shadow: none;
+}
+
+.ezy__signin3-btn-submit {
+  padding: 12px 30px;
+  background-color: #825a39;
+  color: #ffffff;
+}
+
+.ezy__signin3-btn-submit:hover {
+  color: #ae5100;
+}
+
+.ezy__signin3-btn {
+  padding: 12px 30px;
+}
+
+.ezy__signin3-btn,
+.ezy__signin3-btn * {
+  color: #ae5100;
+}
+
+.ezy__signin3-btn:hover {
+  color: #ae5100;
+}
+
+.ezy__signin3-or-separator {
+  position: relative;
+}
+
+.ezy__signin3-or-separator hr {
+  border-color: var(--bs-body-color);
+  opacity: 0.15;
+}
+
+.ezy__signin3-or-separator span {
+  background-color: var(--ezy-form-card-bg);
+  color: var(--bs-body-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 0.8;
+}
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si hay un token almacenado en localStorage
+            const token = localStorage.getItem('token');
+
+            // Si hay un token almacenado, verificar su validez
+            if (token) {
+                fetch('/elMostacho/iniciarSesion/verificarToken', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Si el token es válido, redirigir al dashboard
+                    if (data.valido) {
+                        window.location.href = '/elMostacho/dashboard';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al verificar el token:', error);
+                    // Si hay algún error, dejar que el usuario inicie sesión manualmente
+                });
+            }
+        });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('formularioIniciarSesion').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario tradicional
+
+            // Obtener los valores de los campos del formulario
+            const nombre = document.getElementById('email').value;
+            const contrasenia = document.getElementById('password').value;
+
+            // Enviar los datos al servidor
+            fetch('/elMostacho/iniciarSesion/iniciarSesion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre, contrasenia })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Verificar si la respuesta es exitosa
+                if (data.token) {
+                    // Almacena el token en localStorage
+                    localStorage.setItem('token', data.token);
+                    // Redireccionar al dashboard si los datos son correctos
+                    window.location.href = '/elMostacho/dashboard';
+                } else {
+                    // Mostrar una alerta si los datos son incorrectos
+                    alert(data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error al enviar los datos del formulario:', error);
+                alert('Error al enviar los datos del formulario');
+            });
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
